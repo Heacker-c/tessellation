@@ -17,7 +17,6 @@ void main()
     float depth = clamp( (abs(p.z) - MinDepth) / (MaxDepth - MinDepth), 0.0, 1.0 );
 
     float tessLevel = mix(MaxTessLevel, MinTessLevel, depth);
-    tessLevel = 1;
     gl_TessLevelOuter[0] = tessLevel;
     gl_TessLevelOuter[1] = tessLevel;
     gl_TessLevelOuter[2] = tessLevel;

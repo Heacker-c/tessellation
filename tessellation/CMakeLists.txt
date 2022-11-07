@@ -1,7 +1,8 @@
 set(target tessellation)
 set( tessellation_SOURCES
-	scenebezcurve.cpp
 	main.cpp
+	scenebezcurve.cpp
+	scenesimpletess.cpp
 	scenetessteapot.cpp
 	scenetessteapotdepth.cpp )
 

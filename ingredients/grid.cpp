@@ -6,7 +6,7 @@ Grid::Grid(float size, int nDivisions) {
     nVerts = 4 * (nDivisions + 1);
     std::vector<GLfloat> p;
 
-    GLfloat x, y = 0.0f, z;
+    GLfloat y = 0.0f;
     for( int row = 0; row <= nDivisions; row++ ) {
         GLfloat z = (row * divisionSize) - size2;
         p.push_back(-size2);

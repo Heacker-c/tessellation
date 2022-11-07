@@ -25,7 +25,7 @@ void SceneTessTeapotDepth::initScene()
     prog.setUniform("MaxTessLevel", 18);
     prog.setUniform("MaxDepth", 28.0f);
     prog.setUniform("MinDepth", 1.0f);
-    prog.setUniform("LineWidth", 0.8f);
+    prog.setUniform("LineWidth", 0.5f);
     prog.setUniform("LineColor", vec4(0.05f,0.0f,0.05f,1.0f));
     prog.setUniform("LightPosition", vec4(0.0f,0.0f,0.0f,1.0f));
     prog.setUniform("LightIntensity", vec3(1.0f,1.0f,1.0f));
@@ -42,16 +42,15 @@ void SceneTessTeapotDepth::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    vec3 cameraPos(0.0f ,4.0f, 6.0f);
+    vec3 cameraPos(2.0f ,2.0f, 8.0f);
     view = glm::lookAt(cameraPos,
-                       vec3(0.0f,0.0f,-5.0f),
+                       vec3(0.0f,0.0f,-15.0f),
                        vec3(0.0f,1.0f,0.0f));
 
     for (int i = 0; i < 15; ++i)
     {
         model = mat4(1.0f);
-        model = glm::translate(model, vec3(-3.0f + 1.5f * i, 0.0f, - 1.5f * i));
-        model = glm::translate(model, vec3(0.0f, -1.5f, 0.0f));
+        model = glm::translate(model, vec3(-3.0f + 1.5f * i, -3.5f + i, - 1.5f * i));
         model = glm::rotate(model, glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
         setMatrices();
         teapot.render();

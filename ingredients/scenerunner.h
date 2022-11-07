@@ -113,23 +113,33 @@ private:
         }
     }
 
-    void mainLoop(GLFWwindow * window, std::unique_ptr<Scene> scene) {
+    void mainLoop(GLFWwindow * window, std::unique_ptr<Scene> scene)
+    {
         
         scene->setDimensions(fbw, fbh);
         scene->initScene();
         scene->resize(fbw, fbh);
 
-        while( ! glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE) ) {
+        while( !glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE))
+        {
             GLUtils::checkForOpenGLError(__FILE__,__LINE__);
-			
             scene->update(float(glfwGetTime()));
             scene->render();
             glfwSwapBuffers(window);
 
             glfwPollEvents();
 			int state = glfwGetKey(window, GLFW_KEY_SPACE);
-			if (state == GLFW_PRESS)
-				scene->animate(!scene->animating());
+            if (state == GLFW_PRESS)
+            {
+                scene->animate(!scene->animating());
+            }
+            if (glfwGetKey(window, GLFW_KEY_M))
+            {
+                static GLenum mode = GL_FILL;
+
+                mode = (mode == GL_FILL ? GL_LINE : GL_FILL);
+                glPolygonMode(GL_FRONT_AND_BACK, mode);
+            }
         }
     }
 };
