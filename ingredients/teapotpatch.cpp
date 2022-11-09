@@ -131,9 +131,8 @@ void TeapotPatch::getPatch( int patchNum, glm::vec3 patch[][4], bool reverseV )
     }
 }
 
-void TeapotPatch::render() const {
-    //glPatchParameteri(GL_PATCH_VERTICES, 16);
-
+void TeapotPatch::render() const
+{
     glBindVertexArray(vao);
     glDrawArrays(GL_PATCHES, 0, 512);
 }

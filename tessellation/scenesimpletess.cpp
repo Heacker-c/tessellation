@@ -58,6 +58,17 @@ void SceneSimpletess::initScene()
     prog.use();
 
     glClearColor(0.0, 0.0, 0.0, 1.0);
+    GLint prom;
+    glGetProgramiv(prog.getHandle(), GL_TESS_CONTROL_OUTPUT_VERTICES, &prom);
+    std::cout << "GL_TESS_CONTROL_OUTPUT_VERTICES : " << prom << std::endl;
+    glGetProgramiv(prog.getHandle(), GL_TESS_GEN_MODE, &prom);
+    std::cout << "GL_TESS_GEN_MODE : "<< std::hex << prom << std::endl;
+    glGetProgramiv(prog.getHandle(), GL_TESS_GEN_SPACING, &prom);
+    std::cout << "GL_TESS_GEN_SPACING : " << std::hex << prom << std::endl;
+    glGetProgramiv(prog.getHandle(), GL_TESS_GEN_VERTEX_ORDER, &prom);
+    std::cout << "GL_TESS_GEN_VERTEX_ORDER : " << std::hex << prom << std::endl;
+    glGetProgramiv(prog.getHandle(), GL_TESS_GEN_POINT_MODE, &prom);
+    std::cout << "GL_TESS_GEN_POINT_MODE : " << std::hex << prom << std::endl;
 }
 
 void SceneSimpletess::update(float t)
@@ -69,7 +80,7 @@ void SceneSimpletess::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    view = glm::lookAt(vec3(0.0f, 0.5f, 1.5f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    view = glm::lookAt(vec3(0.0f, 0.5f, 1.5f), vec3(0.0f, 0.2f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
     model = glm::rotate(mat4(1.0f), glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
 
     glBindVertexArray(vaoHandle);
