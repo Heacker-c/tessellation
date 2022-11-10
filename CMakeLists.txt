@@ -15,14 +15,18 @@ if(UNIX)
     set(OpenGL_GL_PREFERENCE GLVND)
 endif()
 
-#find_package( glm CONFIG REQUIRED )
-#find_package( glfw3 CONFIG REQUIRED )
+if(UNIX)
+    find_package( glm CONFIG REQUIRED )
+    find_package( glfw3 CONFIG REQUIRED )
+endif()
 find_package( OpenGL REQUIRED )
 
 include_directories( ingredients )
 
 add_subdirectory( glm )
-add_subdirectory( glfw )
+if(WIN32)
+    add_subdirectory( glfw )
+endif()
 add_subdirectory( ingredients )
 add_subdirectory( tessellation )
 
