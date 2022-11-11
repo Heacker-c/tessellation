@@ -16,17 +16,15 @@ if(UNIX)
 endif()
 
 if(UNIX)
-    find_package( glm CONFIG REQUIRED )
-    find_package( glfw3 CONFIG REQUIRED )
+    #find_package( glm CONFIG REQUIRED )
+    #find_package( glfw3 CONFIG REQUIRED )
 endif()
 find_package( OpenGL REQUIRED )
 
 include_directories( ingredients )
 
 add_subdirectory( glm )
-if(WIN32)
-    add_subdirectory( glfw )
-endif()
+add_subdirectory( glfw )
 add_subdirectory( ingredients )
 add_subdirectory( tessellation )
 
