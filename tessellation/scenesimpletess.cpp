@@ -45,9 +45,6 @@ void SceneSimpletess::initScene()
 
     glBindVertexArray(0);
 
-    // Set the number of vertices per patch.  IMPORTANT!!
-    glPatchParameteri(GL_PATCH_VERTICES, 4);
-
 #if withoutCTS
     GLfloat levelInner[] = { 3.0f, 3.0f };
     GLfloat levelOuter[] = { 2.0f, 3.0f, 4.0f, 5.0f };
@@ -69,6 +66,9 @@ void SceneSimpletess::initScene()
     std::cout << "GL_TESS_GEN_VERTEX_ORDER : " << std::hex << prom << std::endl;
     glGetProgramiv(prog.getHandle(), GL_TESS_GEN_POINT_MODE, &prom);
     std::cout << "GL_TESS_GEN_POINT_MODE : " << std::hex << prom << std::endl;
+
+    // Set the number of vertices per patch.  IMPORTANT!!
+    glPatchParameteri(GL_PATCH_VERTICES, 4);
 }
 
 void SceneSimpletess::update(float t)
