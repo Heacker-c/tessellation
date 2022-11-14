@@ -1,4 +1,4 @@
-#version 400
+#version 320 es
 
 layout (quads, equal_spacing, cw) in;
 //layout (quads, equal_spacing, ccw) in;

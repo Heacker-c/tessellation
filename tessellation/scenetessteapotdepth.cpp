@@ -21,8 +21,8 @@ void SceneTessTeapotDepth::initScene()
     glEnable(GL_DEPTH_TEST);
 
     ///////////// Uniforms ////////////////////
-    prog.setUniform("MinTessLevel", 2);
-    prog.setUniform("MaxTessLevel", 18);
+    prog.setUniform("MinTessLevel", 2.0f);
+    prog.setUniform("MaxTessLevel", 18.0f);
     prog.setUniform("MaxDepth", 28.0f);
     prog.setUniform("MinDepth", 1.0f);
     prog.setUniform("LineWidth", 0.5f);

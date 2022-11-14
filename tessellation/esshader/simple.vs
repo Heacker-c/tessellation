@@ -1,4 +1,4 @@
-#version 400
+#version 320 es
 
 in  vec4  vPosition;
 

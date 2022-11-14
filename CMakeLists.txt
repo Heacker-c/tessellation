@@ -15,9 +15,6 @@ if(UNIX)
     set(OpenGL_GL_PREFERENCE GLVND)
 endif()
 
-if(UNIX)
-    #find_package( glm CONFIG REQUIRED )
-endif()
 find_package( OpenGL REQUIRED )
 
 include_directories( ingredients )

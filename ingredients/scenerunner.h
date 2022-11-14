@@ -28,15 +28,21 @@ public:
         glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
         glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 1 );
 #else
-        // Select OpenGL 4.6
-        glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-        glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
-        glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 2 );
-#endif
+
+#ifdef EGL
         glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+#else
+        // Select OpenGL 4.5
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#endif
+
+#endif
+
         if(samples > 0) {
             glfwWindowHint(GLFW_SAMPLES, samples);
         }

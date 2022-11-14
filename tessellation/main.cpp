@@ -15,7 +15,7 @@ std::map<std::string, std::string> sceneInfo = {
 
 int main(int argc, char* argv[])
 {
-    std::string recipe("tess-simple");
+    std::string recipe("tess-teapot-depth");
 
     SceneRunner runner("Tessellation - " + recipe);
 
