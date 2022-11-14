@@ -1,7 +1,8 @@
 set(target tessellation)
 set( tessellation_SOURCES
-	scenebezcurve.cpp
 	main.cpp
+	scenebezcurve.cpp
+	scenesimpletess.cpp
 	scenetessteapot.cpp
 	scenetessteapotdepth.cpp )
 
@@ -20,3 +21,4 @@ target_link_libraries( ${target}
 		)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/shader DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/esshader DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

@@ -44,8 +44,8 @@ void SceneBezCurve::initScene()
 
     // Segments and strips may be inverted on NVIDIA
     prog.use();
-    prog.setUniform("NumSegments", 50);
-    prog.setUniform("NumStrips", 1);
+    prog.setUniform("NumSegments", 8);
+    prog.setUniform("NumStrips", 5);
     prog.setUniform("LineColor", vec4(1.0f,1.0f,0.5f,1.0f));
 
     solidProg.use();
@@ -68,13 +68,13 @@ void SceneBezCurve::render()
     glBindVertexArray(vaoHandle);
 	setMatrices();
 
+    // Draw the control points
+    solidProg.use();
+    glDrawArrays(GL_POINTS, 0, 4);
+
 	// Draw the curve
     prog.use();
     glDrawArrays(GL_PATCHES, 0, 4);
-
-	// Draw the control points
-    solidProg.use();
-    glDrawArrays(GL_POINTS, 0, 4);
 
     glFinish();
 }
@@ -97,6 +97,7 @@ void SceneBezCurve::compileAndLinkShader()
 {
 	try {
 		prog.compileShader("shader/bezcurve.vs");
+        prog.compileShader("shader/bezcurve.gs");
 		prog.compileShader("shader/bezcurve.fs");
 		prog.compileShader("shader/bezcurve.tes");
 		prog.compileShader("shader/bezcurve.tcs");

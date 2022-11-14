@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.0)
 set (CMAKE_CXX_STANDARD 17)
 set(CXX_STANDARD_REQUIRED ON)
 
-project (GLSLCOOKBOOK)
+project (Tessellation)
 
 if(MSVC)
   add_definitions(/DNOMINMAX)
@@ -15,8 +15,6 @@ if(UNIX)
     set(OpenGL_GL_PREFERENCE GLVND)
 endif()
 
-#find_package( glm CONFIG REQUIRED )
-#find_package( glfw3 CONFIG REQUIRED )
 find_package( OpenGL REQUIRED )
 
 include_directories( ingredients )

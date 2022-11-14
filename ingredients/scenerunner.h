@@ -28,15 +28,25 @@ public:
         glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
         glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 1 );
 #else
-        // Select OpenGL 4.6
-        glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
-        glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 6 );
-#endif
+
+#ifdef EGL
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+#else
+        // Select OpenGL 4.5
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-        if(debug) 
-			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+        if (debug)
+            glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+#endif
+
+#endif
+
         if(samples > 0) {
             glfwWindowHint(GLFW_SAMPLES, samples);
         }
@@ -113,23 +123,33 @@ private:
         }
     }
 
-    void mainLoop(GLFWwindow * window, std::unique_ptr<Scene> scene) {
+    void mainLoop(GLFWwindow * window, std::unique_ptr<Scene> scene)
+    {
         
         scene->setDimensions(fbw, fbh);
         scene->initScene();
         scene->resize(fbw, fbh);
 
-        while( ! glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE) ) {
+        while( !glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE))
+        {
             GLUtils::checkForOpenGLError(__FILE__,__LINE__);
-			
             scene->update(float(glfwGetTime()));
             scene->render();
             glfwSwapBuffers(window);
 
             glfwPollEvents();
 			int state = glfwGetKey(window, GLFW_KEY_SPACE);
-			if (state == GLFW_PRESS)
-				scene->animate(!scene->animating());
+            if (state == GLFW_PRESS)
+            {
+                scene->animate(!scene->animating());
+            }
+            if (glfwGetKey(window, GLFW_KEY_M))
+            {
+                static GLenum mode = GL_FILL;
+
+                mode = (mode == GL_FILL ? GL_LINE : GL_FILL);
+                glPolygonMode(GL_FRONT_AND_BACK, mode);
+            }
         }
     }
 };

@@ -55,8 +55,8 @@ void GLSLProgram::detachAndDeleteShaderObjects() {
 	}
 }
 
-void GLSLProgram::compileShader(const char *fileName) {
-
+void GLSLProgram::compileShader(const char *fileName)
+{
     // Check the file name's extension to determine the shader type
     string ext = getExtension(fileName);
     GLSLShader::GLSLShaderType type = GLSLShader::VERTEX;
@@ -107,10 +107,14 @@ void GLSLProgram::compileShader(const char *fileName,
             throw GLSLProgramException("Unable to create shader program.");
         }
     }
+    string newNmae(fileName);
+#ifdef EGL
+    newNmae = "es" + newNmae;
+#endif // DEBUG
 
-    ifstream inFile(fileName, ios::in);
+    ifstream inFile(newNmae, ios::in);
     if (!inFile) {
-        string message = string("Unable to open: ") + fileName;
+        string message = string("Unable to open: ") + newNmae;
         throw GLSLProgramException(message);
     }
 
@@ -119,7 +123,7 @@ void GLSLProgram::compileShader(const char *fileName,
     code << inFile.rdbuf();
     inFile.close();
 
-    compileShader(code.str(), type, fileName);
+    compileShader(code.str(), type, newNmae.c_str());
 }
 
 void GLSLProgram::compileShader(const string &source,
