@@ -4383,6 +4383,11 @@ static void load_GL_VERSION_3_3(GLADloadproc load) {
 	glad_glSecondaryColorP3ui = (PFNGLSECONDARYCOLORP3UIPROC)load("glSecondaryColorP3ui");
 	glad_glSecondaryColorP3uiv = (PFNGLSECONDARYCOLORP3UIVPROC)load("glSecondaryColorP3uiv");
 }
+static void load_EGL_VERSION_3_0(GLADloadproc load)
+{
+	glad_glPatchParameteri = (PFNGLPATCHPARAMETERIPROC)load("glPatchParameteri");
+	glad_glPatchParameterfv = (PFNGLPATCHPARAMETERFVPROC)load("glPatchParameterfv");
+}
 static void load_GL_VERSION_4_0(GLADloadproc load) {
 	if(!GLAD_GL_VERSION_4_0) return;
 	glad_glMinSampleShading = (PFNGLMINSAMPLESHADINGPROC)load("glMinSampleShading");
@@ -8577,6 +8582,7 @@ int gladLoadGLLoader(GLADloadproc load) {
 	if(glGetString == NULL) return 0;
 	if(glGetString(GL_VERSION) == NULL) return 0;
 	find_coreGL();
+	load_EGL_VERSION_3_0(load);
 	load_GL_VERSION_1_0(load);
 	load_GL_VERSION_1_1(load);
 	load_GL_VERSION_1_2(load);

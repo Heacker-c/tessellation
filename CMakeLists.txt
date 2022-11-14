@@ -17,7 +17,6 @@ endif()
 
 if(UNIX)
     #find_package( glm CONFIG REQUIRED )
-    #find_package( glfw3 CONFIG REQUIRED )
 endif()
 find_package( OpenGL REQUIRED )
 
