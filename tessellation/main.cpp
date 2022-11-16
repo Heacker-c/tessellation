@@ -1,5 +1,6 @@
 #include "scenerunner.h"
 #include "scenebezcurve.h"
+#include "scenesimpletessmore.h"
 #include "scenesimpletess.h"
 #include "scenetessteapot.h"
 #include "scenetessteapotdepth.h"
@@ -15,7 +16,7 @@ std::map<std::string, std::string> sceneInfo = {
 
 int main(int argc, char* argv[])
 {
-    std::string recipe("bez-curve");
+    std::string recipe("tess-simple-more");
 
     SceneRunner runner("Tessellation - " + recipe);
 
@@ -23,6 +24,10 @@ int main(int argc, char* argv[])
     if (recipe == "bez-curve")
     {
         scene = std::unique_ptr<Scene>(new SceneBezCurve());
+    }
+    else if (recipe == "tess-simple-more")
+    {
+        scene = std::unique_ptr<Scene>(new SceneSimpletessMore());
     }
     else if (recipe == "tess-simple")
     {

@@ -2,6 +2,7 @@ set(target tessellation)
 set( tessellation_SOURCES
 	main.cpp
 	scenebezcurve.cpp
+	scenesimpletessmore.cpp
 	scenesimpletess.cpp
 	scenetessteapot.cpp
 	scenetessteapotdepth.cpp )

@@ -1,4 +1,4 @@
-#define EGL 1
+#define EGL 0
 
 #ifndef __glad_h_
 #define __glad_h_

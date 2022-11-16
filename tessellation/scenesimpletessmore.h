@@ -1,5 +1,5 @@
-#ifndef SCENESIMPLETESS_H
-#define SCENESIMPLETESS_H
+#ifndef SCENESIMPLETESSMORE_H
+#define SCENESIMPLETESSMORE_H
 
 #include "scene.h"
 #include "glslprogram.h"
@@ -8,18 +8,19 @@
 
 #include <glm/glm.hpp>
 
-class SceneSimpletess : public Scene
+class SceneSimpletessMore : public Scene
 {
 private:
     GLSLProgram prog;
 
     GLuint vaoHandle;
     GLuint eboHandle;
+
     void setMatrices();
     void compileAndLinkShader();
 
 public:
-    SceneSimpletess() {}
+    SceneSimpletessMore() {}
 
     void initScene();
     void update( float t );

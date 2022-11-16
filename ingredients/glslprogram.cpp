@@ -108,7 +108,7 @@ void GLSLProgram::compileShader(const char *fileName,
         }
     }
     string newNmae(fileName);
-#ifdef EGL
+#if EGL
     newNmae = "es" + newNmae;
 #endif // DEBUG
 

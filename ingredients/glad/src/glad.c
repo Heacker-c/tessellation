@@ -8582,7 +8582,7 @@ int gladLoadGLLoader(GLADloadproc load) {
 	if(glGetString == NULL) return 0;
 	if(glGetString(GL_VERSION) == NULL) return 0;
 	find_coreGL();
-#ifdef EGL
+#if EGL
 	load_EGL_VERSION_3_0(load);
 #endif
 	load_GL_VERSION_1_0(load);
