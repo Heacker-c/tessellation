@@ -1,0 +1,16 @@
+#version 320 es
+
+layout (quads, equal_spacing, cw) in;
+uniform mat4  MVP;
+
+void main()
+{
+    float u = gl_TessCoord.x;
+    float v = gl_TessCoord.y;
+
+#define p(i)  gl_in[i].gl_Position
+
+    vec4 pos = v * (u * p(0) + (1.0 - u) * p(1)) + (1.0 - v) * (u * p(3) + (1.0 - u) * p(2));
+    pos.z = -0.2;
+    gl_Position = MVP * pos;
+}

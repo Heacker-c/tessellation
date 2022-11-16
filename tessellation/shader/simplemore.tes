@@ -7,21 +7,6 @@ layout (quads, equal_spacing, cw) in;
 //layout (quads, equal_spacing, ccw, point_mode) in;
 uniform mat4  MVP;
 
-in float cc;
-
-float Hanning( vec2 p )
-{
-    p -= 0.5;       // map unit square to [-.5, .5]
-
-    float r = length(p);
-
-#define M_PI_half		3.14159265358979323846 / 2.0 
-    r = cos( M_PI_half * r);
-    r *= r;
-
-    return r;
-}
-
 void main()
 {
     float u = gl_TessCoord.x;
@@ -30,7 +15,7 @@ void main()
 #define p(i)  gl_in[i].gl_Position
 
     vec4 pos = v * (u * p(0) + (1.0 - u) * p(1)) + (1.0 - v) * (u * p(3) + (1.0 - u) * p(2));
-    pos.z = Hanning( gl_TessCoord.xy ) * cc;
+    pos.z = -0.2;
     
     gl_Position = MVP * pos;
 }

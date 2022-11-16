@@ -1,4 +1,4 @@
-#include "scenesimpletess.h"
+#include "scenesimpletessmore.h"
 
 #include <iostream>
 
@@ -9,10 +9,11 @@ using glm::mat4;
 
 #define withoutCTS 0
 #define withoutPatch 0
-#define withoutELEMENT 0
+#define withoutELEMENT 1
+
 const int  NumVertices = 4;  // vertices in our patch
 
-void SceneSimpletess::initScene()
+void SceneSimpletessMore::initScene()
 {
     compileAndLinkShader();
     glEnable(GL_DEPTH_TEST);
@@ -62,7 +63,7 @@ void SceneSimpletess::initScene()
 #endif
 
     prog.use();
-#if 0
+#if 1
     glClearColor(0.0, 0.0, 0.0, 1.0);
     GLint prom;
     glGetProgramiv(prog.getHandle(), GL_TESS_CONTROL_OUTPUT_VERTICES, &prom);
@@ -82,12 +83,12 @@ void SceneSimpletess::initScene()
 #endif
 }
 
-void SceneSimpletess::update(float t)
+void SceneSimpletessMore::update(float t)
 {
 
 }
 
-void SceneSimpletess::render()
+void SceneSimpletessMore::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -112,7 +113,7 @@ void SceneSimpletess::render()
 #endif
 }
 
-void SceneSimpletess::setMatrices()
+void SceneSimpletessMore::setMatrices()
 {
     mat4 mv = view * model;
     static float theta;
@@ -123,25 +124,24 @@ void SceneSimpletess::setMatrices()
     prog.setUniform("MVP", projection * mv);
 }
 
-void SceneSimpletess::resize(int w, int h)
+void SceneSimpletessMore::resize(int w, int h)
 {
     glViewport(0, 0, w, h);
-
 }
 
-void SceneSimpletess::compileAndLinkShader()
+void SceneSimpletessMore::compileAndLinkShader()
 {
     try
     {
 #if !withoutPatch
 #if !withoutCTS
-        prog.compileShader("shader/simple.tcs");
+        prog.compileShader("shader/simplemore.tcs");
 #endif
-        prog.compileShader("shader/simple.tes");
+        prog.compileShader("shader/simplemore.tes");
 #endif
-        prog.compileShader("shader/simple.vs");
-        prog.compileShader("shader/simple.gs");
-        prog.compileShader("shader/simple.fs");
+        prog.compileShader("shader/simplemore.vs");
+        prog.compileShader("shader/simplemore.gs");
+        prog.compileShader("shader/simplemore.fs");
 
         prog.link();
         prog.use();
@@ -152,3 +152,4 @@ void SceneSimpletess::compileAndLinkShader()
         exit(EXIT_FAILURE);
     }
 }
+

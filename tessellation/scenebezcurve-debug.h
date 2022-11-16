@@ -1,5 +1,5 @@
-#ifndef SCENESIMPLETESS_H
-#define SCENESIMPLETESS_H
+#ifndef SCENEBEZCURVEDEBUG_H
+#define SCENEBEZCURVEDEBUG_H
 
 #include "scene.h"
 #include "glslprogram.h"
@@ -8,18 +8,19 @@
 
 #include <glm/glm.hpp>
 
-class SceneSimpletess : public Scene
+class SceneBezCurveDebug : public Scene
 {
 private:
     GLSLProgram prog;
+    GLSLProgram solidProg;
 
     GLuint vaoHandle;
-    GLuint eboHandle;
+
     void setMatrices();
     void compileAndLinkShader();
 
 public:
-    SceneSimpletess() {}
+    SceneBezCurveDebug();
 
     void initScene();
     void update( float t );
@@ -27,4 +28,4 @@ public:
     void resize(int, int);
 };
 
-#endif // SCENEBEZCURVE_H
+#endif // SceneBezCurveDebug_H

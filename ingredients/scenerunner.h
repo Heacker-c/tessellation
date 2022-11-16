@@ -3,8 +3,8 @@
 #include <GLFW/glfw3.h>
 #include "glutils.h"
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 600
+#define WIN_WIDTH 2000
+#define WIN_HEIGHT 1200
 
 #include <map>
 #include <string>
@@ -29,7 +29,7 @@ public:
         glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 1 );
 #else
 
-#ifdef EGL
+#if EGL
         glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -37,7 +37,7 @@ public:
 #else
         // Select OpenGL 4.5
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
@@ -69,9 +69,10 @@ public:
         GLUtils::dumpGLInfo();
 
         // Initialization
-        glClearColor(0.5f,0.5f,0.5f,1.0f);
-#ifndef __APPLE__
-		if (debug) {
+        glClearColor(0.15f,0.15f,0.15f,1.0f);
+#if 0
+		if (debug)
+        {
 			glDebugMessageCallback(GLUtils::debugCallback, nullptr);
 			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, GL_TRUE);
 			glDebugMessageInsert(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_MARKER, 0,

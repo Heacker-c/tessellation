@@ -2,23 +2,10 @@ set(target ingredients)
 
 set(ingredients_SOURCES
         teapotpatch.cpp
-        teapot.cpp
-        torus.cpp
         glutils.cpp
-        objmesh.cpp
         glslprogram.cpp
-        cube.cpp
-        plane.cpp
-        sphere.cpp
-        cookbookogl.h
-        scene.h
-        teapotdata.h
-        glad/src/glad.c trianglemesh.cpp trianglemesh.h aabb.h
-        scenerunner.h
-        texture.h texture.cpp
-        utils.h grid.cpp grid.h random.h
-        skybox.cpp skybox.h
-        stbimpl.cpp)
+        glad/src/glad.c
+        trianglemesh.cpp)
 
 add_library(${target} STATIC ${ingredients_SOURCES})
 

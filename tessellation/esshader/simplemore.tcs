@@ -1,8 +1,6 @@
-#version 400
+#version 320 es
 
 layout (vertices = 4) out;
-
-out float cc;
 
 void main()
 {
@@ -15,6 +13,4 @@ void main()
     gl_TessLevelOuter[3] = 5.0;
 
     gl_out[gl_InvocationID].gl_Position	= gl_in[gl_InvocationID].gl_Position;
-
-    cc = 0.5;
 }

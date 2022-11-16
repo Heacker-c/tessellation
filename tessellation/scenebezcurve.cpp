@@ -1,8 +1,6 @@
 #include "scenebezcurve.h"
 
 #include <iostream>
-using std::endl;
-using std::cerr;
 
 #include <glm/gtc/matrix_transform.hpp>
 using glm::vec3;
@@ -17,11 +15,11 @@ void SceneBezCurve::initScene()
     glEnable(GL_DEPTH_TEST);
 
     float c = 3.5f;
-    projection = glm::ortho(-0.4f * c, 0.4f * c, -0.3f *c, 0.3f*c, 0.1f, 100.0f);
+    projection = glm::ortho(-0.4f * c, 0.4f * c, -0.3f * c, 0.3f * c, 0.1f, 100.0f);
     glPointSize(10.0f);
 
     // Set up patch VBO
-    float v[] = {-1.0f, -1.0f, -0.5f, 1.0f, 0.5f, -1.0f, 1.0f, 1.0f};
+    float v[] = { -1.0f, -1.0f, -0.5f, 1.0f, 0.5f, -1.0f, 1.0f, 1.0f };
 
     GLuint vboHandle;
     glGenBuffers(1, &vboHandle);
@@ -40,43 +38,39 @@ void SceneBezCurve::initScene()
     glBindVertexArray(0);
 
     // Set the number of vertices per patch.  IMPORTANT!!
-    glPatchParameteri( GL_PATCH_VERTICES, 4);
+    glPatchParameteri(GL_PATCH_VERTICES, 4);
 
     // Segments and strips may be inverted on NVIDIA
     prog.use();
     prog.setUniform("NumSegments", 8);
     prog.setUniform("NumStrips", 5);
-    prog.setUniform("LineColor", vec4(1.0f,1.0f,0.5f,1.0f));
+    prog.setUniform("LineColor", vec4(1.0f, 1.0f, 0.5f, 1.0f));
 
     solidProg.use();
-    solidProg.setUniform("Color", vec4(0.5f,1.0f,1.0f,1.0f));
+    solidProg.setUniform("Color", vec4(0.5f, 1.0f, 1.0f, 1.0f));
 }
 
-void SceneBezCurve::update( float t ) {}
+void SceneBezCurve::update(float t) {}
 
 void SceneBezCurve::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    vec3 cameraPos(0.0f ,0.0f,1.5f);
-    view = glm::lookAt(cameraPos,
-                       vec3(0.0f,0.0f,0.0f),
-                       vec3(0.0f,1.0f,0.0f));
+    vec3 cameraPos(0.0f, 0.0f, 1.5f);
+    view = glm::lookAt(cameraPos, vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
     model = mat4(1.0f);
 
     glBindVertexArray(vaoHandle);
-	setMatrices();
+    setMatrices();
 
     // Draw the control points
     solidProg.use();
     glDrawArrays(GL_POINTS, 0, 4);
 
-	// Draw the curve
+    // Draw the curve
     prog.use();
     glDrawArrays(GL_PATCHES, 0, 4);
-
-    glFinish();
 }
 
 void SceneBezCurve::setMatrices()
@@ -90,25 +84,28 @@ void SceneBezCurve::setMatrices()
 
 void SceneBezCurve::resize(int w, int h)
 {
-    glViewport(0,0,w,h);
+    glViewport(0, 0, w, h);
 }
 
 void SceneBezCurve::compileAndLinkShader()
 {
-	try {
-		prog.compileShader("shader/bezcurve.vs");
+    try
+    {
+        prog.compileShader("shader/bezcurve.vs");
         prog.compileShader("shader/bezcurve.gs");
-		prog.compileShader("shader/bezcurve.fs");
-		prog.compileShader("shader/bezcurve.tes");
-		prog.compileShader("shader/bezcurve.tcs");
-    	prog.link();
-    	prog.use();
+        prog.compileShader("shader/bezcurve.fs");
+        prog.compileShader("shader/bezcurve.tes");
+        prog.compileShader("shader/bezcurve.tcs");
+        prog.link();
+        prog.use();
 
-    	solidProg.compileShader("shader/solid.vs");
-    	solidProg.compileShader("shader/solid.fs");
-    	solidProg.link();
-    } catch(GLSLProgramException &e ) {
-    	cerr << e.what() << endl;
- 		exit( EXIT_FAILURE );
+        solidProg.compileShader("shader/solid.vs");
+        solidProg.compileShader("shader/solid.fs");
+        solidProg.link();
+    }
+    catch (GLSLProgramException& e)
+    {
+        std::cerr << e.what() << std::endl;
+        exit(EXIT_FAILURE);
     }
 }
